@@ -1,0 +1,179 @@
+using System;
+
+namespace ahorcado
+{
+    class Program
+    {
+        static bool ExisteLetra(char[] letras, char letra, int longitud)
+        {
+            bool respuesta = false;
+            for (int i = 0; i < longitud; i++)
+            {
+                if (letras[i] == letra)
+                {
+                    respuesta = true;
+                }
+            }
+
+            return respuesta;
+        }
+        static void Main(string[] args)
+        {
+
+            string palabra = "tecmilenio" ; 
+            int longitud = palabra.Length;
+            char letraCapturada = ' ';
+            char[] letras = new char[longitud];
+            char[] PalabraDibujar = new char[longitud];
+            int intentos = 0;
+            int ganador = 0;
+            int intentos1 = 5;
+
+            //Transforma un string en un vector char y lo llena
+            for (int i = 0; i < longitud; i++)
+            {
+                letras[i] = char.Parse(palabra.Substring(i, 1));
+            }
+            Console.WriteLine("");
+            // Escribe la palabra, letra x letra
+            // for (int i = 0; i < longitud; i++)
+            // {
+            //    Console.Write(letras[i] + " ");
+            // }
+
+            Console.WriteLine("");
+            // Llena o inicializa el vecor de resultado 
+            for (int i = 0; i < longitud; i++)
+            {
+                PalabraDibujar[i] = '_';
+                Console.Write(PalabraDibujar[i] + " ");
+            }
+
+            do
+            {
+
+                Console.WriteLine("");
+                Console.WriteLine("Captura una letra:");
+                letraCapturada = char.Parse(Console.ReadLine().ToUpper());
+
+
+                // Revisa el vector original vs el vector resultado, si la letra capturada es
+                // igual a al indice en el vector original, lo copia en el vector resultado 
+                for (int i = 0; i < longitud; i++)
+                {
+                    if (letras[i] == letraCapturada)
+                    {
+                        PalabraDibujar[i] = letraCapturada;
+                        ganador = ganador + 1;
+                    }
+                }
+
+                Console.WriteLine("");
+                // Muestra el vector resultante
+                for (int i = 0; i < longitud; i++)
+                {
+                    Console.Write(PalabraDibujar[i] + " ");
+                }
+
+                if (ExisteLetra(letras, letraCapturada, longitud))
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("La letra {0} SI existe ", letraCapturada);
+                }
+                else
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("La letra {0} NO existe ", letraCapturada);
+                    intentos = intentos + 1;
+
+                    intentos1 = intentos1 - 1;
+                    mostrarhorca(intentos);
+
+                    Console.WriteLine("tienes " + intentos1 + " intentos");
+                }
+            } while (intentos < 5 && ganador < longitud);
+
+            if (ganador == longitud)
+            {
+                Console.WriteLine("\n FELICIDADES GANASTE!!!");
+            }
+
+            if (intentos == 5)
+            {
+                Console.WriteLine("\n LASTIMA PERDISTE!!!");
+            }
+
+
+        }
+        static void mostrarhorca(int intentos)
+        {
+            switch (intentos)
+            {
+                case 1:
+                    Console.WriteLine("-------");
+                    Console.WriteLine("|     |");
+                    Console.WriteLine("|     0");
+                    Console.WriteLine("|     |");
+                    Console.WriteLine("|");
+                    Console.WriteLine("|");
+                    Console.WriteLine("________");
+                    Console.WriteLine("es color blanco");
+
+                    break;
+
+                case 2:
+                    Console.WriteLine("-------");
+                    Console.WriteLine("|     |");
+                    Console.WriteLine("|     0");
+                    Console.WriteLine("|    /|");
+                    Console.WriteLine("|");
+                    Console.WriteLine("|");
+                    Console.WriteLine("________");
+                    Console.WriteLine("es color blanco y verde");
+
+
+                    break;
+
+                case 3:
+                    Console.WriteLine("-------");
+                    Console.WriteLine("|     |");
+                    Console.WriteLine("|     0");
+                    Console.WriteLine("|    /|\\");
+                    Console.WriteLine("|     ");
+                    Console.WriteLine("|");
+                    Console.WriteLine("________");
+                    Console.WriteLine("es color blanco , verde y es una universidad");
+
+
+                    break;
+
+                case 4:
+                    Console.WriteLine("-------");
+                    Console.WriteLine("|     |");
+                    Console.WriteLine("|     0");
+                    Console.WriteLine("|    /|\\");
+                    Console.WriteLine("|    /");
+                    Console.WriteLine("|");
+                    Console.WriteLine("________");
+                    Console.WriteLine("es color blanco , verde , es una univeridad y tiene varios campus en todo el pais");
+
+
+                    break;
+
+                case 5:
+                    Console.WriteLine("-------");
+                    Console.WriteLine("|     |");
+                    Console.WriteLine("|     0");
+                    Console.WriteLine("|    /|\\");
+                    Console.WriteLine("|    / \\");
+                    Console.WriteLine("|");
+                    Console.WriteLine("________");
+                    Console.WriteLine("la respuesta era tecmilenio");
+
+                    break;
+            }
+        }
+
+    }
+
+}
